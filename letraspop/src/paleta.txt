@@ -1,0 +1,11 @@
+colores:
+background-white #FAF8F8
+text-dark #251F26
+
+background-dark #251F26
+text-white #FAF8F8
+
+constrast-1 #8D8C8C
+constrast-2 #8D848B
+
+UI-main brand #806346
