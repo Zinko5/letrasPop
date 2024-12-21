@@ -26,7 +26,7 @@ Y que tenga las siguientes funcionalidades:
 Para inciar a desarrollar por algún lado, decidí que lo primero que voy a hacer es la aplicacion web implementado solo la funcion de la transcripcion automatica. Este proceso lo realizo principalmente siguiendo las indicaciones de ChatGPT
 
 == Herramientas utilizadas
-En el desarrollo de LetrasPop, se tiene pensado usar:
+Al principio tenía pensado usar:
 - React JS
 - Tailwind
 - Axios
@@ -39,6 +39,21 @@ En el desarrollo de LetrasPop, se tiene pensado usar:
 - Cloudfare
 - Loud balancer
 - Google AdSenses
+
+Pero tras un análisis más profundo de las herramientas y tecnologias, decidí que las que usaré serán:
+- *Typst*: Lenguaje de marcado para registrar el devlog
+- *React JS*: Framework para la interfaz web
+- *Node JS*: Backend para la lógica del servidor
+- *PostgreSQL*: Base de datos relacional para gestionar usuarios, historial y relaciones
+- *MongoDB*: Base de datos basada en documentos para guardar las transcripciones y metadatos
+- *Speechmatics*: Para realizar las transcripciones automaticas
+- *Auth JS*: Para la autentificacion de usuarios
+- *Render*: Para el hosting inicial de la página web y la base de datos de PostgreSQL
+- *Google Cloud Hosting*: Para el hosting masivo de la página web y la base de datos de PostgreSQL
+- *Atlas*: Para el hosting de la datos de MongoDB
+- *Google Ads*: Para mostrar publicidad y monetizar el sitio
+- *Next JS* Para optimizar el SEO y las páginas estáticas
+// Agregar axios
 === El modelo de transcripcion
 De los modelos de transcripcion automatica que probé, realice el siguiente ranking basado en la precisión de la letra que dieron como resultado.
 1. Speechmatics
@@ -46,105 +61,123 @@ De los modelos de transcripcion automatica que probé, realice el siguiente rank
 3. Google Cloud Speech-to-texts 
 La cancion con la que hice la prueba fue "La casa azul - Parade", cancion cuya letra no está registrada en ningun sitio de internet. El resultado de la transcripcion de Speechmatics fue:
 
-#set block(width: 400pt, inset: (x:30pt, y:15pt), breakable: false, fill: luma(91.85%))
-#show block: set par(leading: 5pt, spacing: 15.5pt)
-#show block: set align(center)
+// #set block(width: 400pt, inset: (x:30pt, y:15pt), breakable: false, fill: luma(91.85%))
+// #show block: set par(leading: 5pt, spacing: 15.5pt)
+// #show block: set align(center)
 
+#align(center)[
+  #block(width: 400pt, inset: (x:30pt, y:15pt), breakable: false, fill: luma(91.85%))[
+    #align(left)[
+      #par(leading: 5pt, spacing: 15.5pt)[
+        Los pasillos de la Casa Azul me llevaron donde yo nunca, jamás creí que pudiera llegar.
 
-#block[#align(left)[Los pasillos de la Casa Azul me llevaron donde yo nunca, jamás creí que pudiera llegar.
+        Y el recuerdo de lo que encontré me hizo regresar a su portal. Sin saber. Sin pensar.
 
-Y el recuerdo de lo que encontré me hizo regresar a su portal. Sin saber. Sin pensar.
+        Veo brillar las luces de la casa azul después de la puesta del sol y los salones se llenan de música y gente.
 
-Veo brillar las luces de la casa azul después de la puesta del sol y los salones se llenan de música y gente.
+        Gente feliz tarareando canciones de hace 100 años. Estoy.
 
-Gente feliz tarareando canciones de hace 100 años. Estoy.
+        No volveré a salir de aquí.
 
-No volveré a salir de aquí.
+        No volveré a salir de aquí.
 
-No volveré a salir de aquí.
+        Voy a salir de aquí.
 
-Voy a salir de aquí.
+        Se apagarán las luces de la Casa Azul cuando empiece a amanecer.
 
-Se apagarán las luces de la Casa Azul cuando empiece a amanecer.
+        Me dormiré despacio.
 
-Me dormiré despacio.
+        Soñando mis sueños.
 
-Soñando mis sueños.
+        Al otro lado del espejo. Muy despacio.
 
-Al otro lado del espejo. Muy despacio.
+        Soñando mis sueños. Estoy.
 
-Soñando mis sueños. Estoy.
+        Ta ta ta ta ta ta ta ta ta ta ta ta ta ta ta ta ta ta.
 
-Ta ta ta ta ta ta ta ta ta ta ta ta ta ta ta ta ta ta.
+        La casa azul será mi hogar.
 
-La casa azul será mi hogar.
+        Ta da ta ta ta ta ta ta ta ta ta ta toc, toc, toc, toc. Sin saber. Sin pensar.
 
-Ta da ta ta ta ta ta ta ta ta ta ta toc, toc, toc, toc. Sin saber. Sin pensar.
+        Cha cha, cha, cha, cha, cha, cha, cha, cha, cha.
 
-Cha cha, cha, cha, cha, cha, cha, cha, cha, cha.
+        La casa azul será mi hogar.
 
-La casa azul será mi hogar.
+        Cha cha, cha, cha, cha, cha, cha, cha, cha, cha. 
 
-Cha cha, cha, cha, cha, cha, cha, cha, cha, cha. 
-
-La casa azul será mi hogar. Mi. Mi. Mi. Mi, Mi. Mi. Mi. Mi.]]
+        La casa azul será mi hogar. Mi. Mi. Mi. Mi, Mi. Mi. Mi. Mi.
+      ]
+    ]
+  ]
+]
 
 Mientras que la letra correcta transcita debe ser:
 
-#block[#align(left)[Los pasillos de la Casa Azul\
-Me llevaron donde yo nunca, jamás \
-Creí que pudiera llegar.
+#align(center)[
+  #block(width: 400pt, inset: (x:30pt, y:15pt), breakable: false, fill: luma(91.85%))[
+    #align(left)[
+      #par(leading: 5pt, spacing: 15.5pt)[
+        Los pasillos de la Casa Azul\
+        Me llevaron donde yo nunca, jamás \
+        Creí que pudiera llegar
 
-Y el recuerdo de lo que encontré\
-Me hizo regresar a su portal\
-Sin saber\
-Sin pensar
+        Y el recuerdo de lo que encontré\
+        Me hizo regresar a su portal\
+        Sin saber\
+        Sin pensar
 
-Veo brillar\
-Las luces de la casa azul\
-Después de la puesta del sol
+        Veo brillar\
+        Las luces de la casa azul\
+        Después de la puesta del sol
 
-Y los salones se llenan de música y gente\
-Gente feliz\
-Tarareando canciones de hace 100 años\
-Estoy
+        Y los salones se llenan de música y gente\
+        Gente feliz\
+        Tarareando canciones de hace 100 años\
+        Estoy
 
-No volveré a salir de aquí\
-No volveré a salir de aquí\
-(No volveré a salir de aquí)
+        No volveré a salir de aquí\
+        No volveré a salir de aquí\
+        (No volveré a salir de aquí)
 
-Se apagarán\
-Las luces de la Casa Azul\
-Cuando empiece a amanecer
+        Se apagarán\
+        Las luces de la Casa Azul\
+        Cuando empiece a amanecer
 
-Me dormiré despacio\
-Soñando mis sueños\
-Al otro lado del espejo\
-Muy despacio\
-Soñando mis sueños\
-Estoy
+        Me dormiré despacio\
+        Soñando mis sueños\
+        Al otro lado del espejo\
+        Muy despacio\
+        Soñando mis sueños\
+        Estoy
 
-(Cha cha cha cha cha)\
-(Cha cha cha cha cha)
+        (Cha cha cha cha cha)\
+        (Cha cha cha cha cha)
 
-La casa azul será mi hogar
+        La casa azul será mi hogar
 
-(Cha cha cha cha cha)\
-(Cha cha cha cha cha)
+        (Cha cha cha cha cha)\
+        (Cha cha cha cha cha)
 
-Sin saber\
-Sin pensar
+        Sin saber\
+        Sin pensar
 
-(Cha cha cha cha cha)
+        (Cha cha cha cha cha)
 
-(Será)
+        (Será)
 
-La casa azul será mi hogar
+        La casa azul será mi hogar
 
-(Cha cha cha cha cha)
+        (Cha cha cha cha cha)
 
-(Será)
+        (Será)
 
-La casa azul será mi hogar]]
+        La casa azul será mi hogar
+      ]
+    ]
+  ]
+]
 
 Como se puede observar, hay ciertos errores en la transcripcion automatica, pero fueron mínimos en comparación con los otros modelos probados 
+
+= Minimum Viable Product
+abc
